@@ -1,0 +1,48 @@
+.layout-wrapper {
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.layout-columns {
+  min-height: 100vh;
+  margin: 0 !important;
+}
+
+.sidebar-container {
+  z-index: 10;
+}
+
+.main-content-container {
+  background-color: #f8fafc;
+  padding: 2rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.main-header {
+  margin-bottom: 0.5rem;
+}
+
+.welcome-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+
+.welcome-title span {
+  color: #2563eb;
+}
+
+.page-content {
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .main-content-container {
+    padding: 1rem 1.25rem;
+  }
+}

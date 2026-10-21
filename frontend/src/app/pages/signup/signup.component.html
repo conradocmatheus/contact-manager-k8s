@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="box">
+    <h1 class="title is-4 has-text-centered">CADASTRE-SE</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control">
+          <input class="input" type="text" formControlName="name" placeholder="Digite seu nome">
+        </div>
+        <p class="help is-danger" *ngIf="signupForm.get('name')?.errors?.['required']">Nome é obrigatório</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" formControlName="email" placeholder="Digite seu email">
+        </div>
+        <p class="help is-danger" *ngIf="signupForm.get('email')?.errors?.['required']">Email é obrigatório</p>
+        <p class="help is-danger" *ngIf="signupForm.get('email')?.errors?.['email']">Email inválido</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Senha</label>
+        <div class="control">
+          <input class="input" type="password" formControlName="password" placeholder="Digite sua senha">
+        </div>
+        <p class="help is-danger" *ngIf="signupForm.get('password')?.errors?.['required']">Senha é obrigatória</p>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary is-fullwidth" type="submit" [disabled]="signupForm.invalid">Cadastrar</button>
+        </div>
+      </div>
+
+    </form>
+    <p class="has-text-centered" style="margin-top: 15px;">
+      Já tem uma conta? <a routerLink="/login">Faça login</a>
+    </p>
+  </div>
+</div>

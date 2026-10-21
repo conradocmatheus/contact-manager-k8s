@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="box">
+    <h1 class="title is-4 has-text-centered">LOGIN</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" formControlName="email" placeholder="Digite seu email">
+        </div>
+        <p class="help is-danger" *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório</p>
+        <p class="help is-danger" *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Senha</label>
+        <div class="control">
+          <input class="input" type="password" formControlName="password" placeholder="Digite sua senha">
+        </div>
+        <p class="help is-danger" *ngIf="loginForm.get('password')?.errors?.['required']">Senha é obrigatória</p>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary is-fullwidth" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <span *ngIf="isLoading" class="loader"></span>
+            <span *ngIf="!isLoading">Entrar</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="help is-danger has-text-centered" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <div class="field has-text-centered">
+        <p class="is-size-7">
+          Não tem uma conta? <a routerLink="/signup" class="has-text-link">Cadastre-se agora</a>
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>

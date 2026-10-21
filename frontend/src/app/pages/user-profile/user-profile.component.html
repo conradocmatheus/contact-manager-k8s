@@ -1,0 +1,100 @@
+<div class="profile-container">
+  <div class="card-section profile-card">
+    <div class="profile-avatar">
+      <span class="icon is-large avatar-icon">
+        <i class="fas fa-user-circle fa-4x"></i>
+      </span>
+      <h1 class="title is-3 mt-2">Meu Perfil</h1>
+      <p class="subtitle is-6">Gerencie suas informações pessoais e credenciais</p>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control has-icons-left">
+          <input class="input" type="text" formControlName="name" placeholder="Digite seu nome">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+        <p class="help is-danger" *ngIf="profileForm.get('name')?.errors?.['required']">Nome é obrigatório</p>
+      </div>
+
+      <div class="field">
+        <label class="label">E-mail</label>
+        <div class="control has-icons-left">
+          <input class="input" type="email" formControlName="email" placeholder="Digite seu e-mail">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+        <p class="help is-danger" *ngIf="profileForm.get('email')?.errors?.['required']">E-mail é obrigatório</p>
+        <p class="help is-danger" *ngIf="profileForm.get('email')?.errors?.['email']">E-mail inválido</p>
+      </div>
+
+      <hr class="divider">
+      <h4 class="title is-5 mb-3">Alterar Senha</h4>
+
+      <div class="field">
+        <label class="label">Senha Atual</label>
+        <div class="control has-icons-left">
+          <input class="input" type="password" formControlName="currentPassword" placeholder="Digite sua senha atual">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Nova Senha</label>
+        <div class="control has-icons-left">
+          <input class="input" type="password" formControlName="newPassword" placeholder="Digite sua nova senha">
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+        <p class="help is-danger" *ngIf="profileForm.get('newPassword')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Confirmar Nova Senha</label>
+        <div class="control has-icons-left">
+          <input class="input" type="password" formControlName="confirmPassword" placeholder="Confirme sua nova senha">
+          <span class="icon is-small is-left">
+            <i class="fas fa-check-double"></i>
+          </span>
+        </div>
+        <p class="help is-danger" *ngIf="profileForm.errors?.['notSame']">As senhas não coincidem</p>
+      </div>
+
+      <div class="field mt-5">
+        <div class="control">
+          <button class="button is-primary is-fullwidth" type="submit" [disabled]="profileForm.invalid">
+            <span class="icon"><i class="fas fa-save"></i></span>
+            <span>Salvar Alterações</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <hr class="divider">
+
+    <div class="danger-zone">
+      <h4 class="title is-5 has-text-danger mb-3">Zona de Perigo</h4>
+      <div class="buttons-group">
+        <button class="button is-warning" (click)="removeContacts()">
+          <span class="icon"><i class="fas fa-trash-alt"></i></span>
+          <span>Remover Todos os Contatos</span>
+        </button>
+        <button class="button is-danger" (click)="deleteAccount()">
+          <span class="icon"><i class="fas fa-user-times"></i></span>
+          <span>Apagar Conta</span>
+        </button>
+        <button class="button is-dark" (click)="logout()">
+          <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+          <span>Sair da Conta</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

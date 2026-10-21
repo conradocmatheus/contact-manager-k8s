@@ -1,0 +1,35 @@
+.menu {
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-label {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.menu-list a {
+  border-radius: 4px;
+  padding: 0.75em 1em;
+  margin: 0.25em 0;
+  transition: background-color 0.3s;
+}
+
+.menu-list a:hover {
+  background-color: #3f4e5e;
+}
+
+.menu-list a.is-active {
+  background-color: #3273dc;
+  color: white;
+}
+
+.table-container {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}

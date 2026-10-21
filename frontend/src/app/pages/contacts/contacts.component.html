@@ -1,0 +1,120 @@
+<div class="contacts-container">
+  <div class="contacts-header">
+    <h1 class="title is-2">Lista de Contatos</h1>
+  </div>
+
+  <div class="actions-toolbar">
+    <div class="control has-icons-left search-control">
+      <input
+        class="input"
+        type="text"
+        placeholder="Pesquisar por nome ou e-mail..."
+        [ngModel]="searchTerm"
+        (ngModelChange)="onSearchChange($event)"
+        aria-label="Pesquisar contato">
+      <span class="icon is-small is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </span>
+    </div>
+
+    <div class="buttons-group">
+      <button class="button is-warning" (click)="exportContacts()" aria-label="Exportar contatos">
+        <span class="icon is-small">
+          <i class="fas fa-file-export" aria-hidden="true"></i>
+        </span>
+        <span>Exportar para CSV</span>
+      </button>
+
+      <button class="button is-success" (click)="createContact()" aria-label="Criar novo contato">
+        <span class="icon is-small">
+          <i class="fas fa-plus" aria-hidden="true"></i>
+        </span>
+        <span>Criar Contato</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="has-text-centered my-5" *ngIf="loading">
+    <span class="icon is-large has-text-info">
+      <i class="fas fa-spinner fa-pulse fa-2x"></i>
+    </span>
+    <p class="mt-2 text-secondary">Carregando contatos...</p>
+  </div>
+
+  <div class="notification is-danger is-light" *ngIf="loadError && !loading" role="alert">
+    {{ loadError }}
+  </div>
+
+  <div class="table-container" *ngIf="!loading">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th class="has-text-centered">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts">
+          <td class="has-text-weight-medium">{{ contact.name }}</td>
+          <td>{{ contact.email || '-' }}</td>
+          <td>{{ contact.phone | phoneFormat }}</td>
+          <td class="actions-cell has-text-centered">
+            <button class="button is-small is-info mr-2" (click)="editContact(contact)" aria-label="Editar contato">
+              <span class="icon is-small">
+                <i class="fas fa-edit" aria-hidden="true"></i>
+              </span>
+            </button>
+            <button class="button is-small is-danger" (click)="deleteContact(contact)" aria-label="Deletar contato">
+              <span class="icon is-small">
+                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+              </span>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="contacts.length === 0">
+          <td colspan="4" class="has-text-centered py-5 has-text-grey">
+            Nenhum contato encontrado
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-wrapper" *ngIf="totalPages > 0 && !loading">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <button class="pagination-previous" [disabled]="currentPage === 1" (click)="previousPage()">Anterior</button>
+      <button class="pagination-next" [disabled]="currentPage === totalPages" (click)="nextPage()">Próxima</button>
+      <ul class="pagination-list">
+        <li *ngIf="currentPage > 2">
+          <a class="pagination-link" (click)="goToPage(1)">1</a>
+        </li>
+        <li *ngIf="currentPage > 3">
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li *ngIf="currentPage > 1">
+          <a class="pagination-link" (click)="goToPage(currentPage - 1)">{{ currentPage - 1 }}</a>
+        </li>
+        <li>
+          <a class="pagination-link is-current">{{ currentPage }}</a>
+        </li>
+        <li *ngIf="currentPage < totalPages">
+          <a class="pagination-link" (click)="goToPage(currentPage + 1)">{{ currentPage + 1 }}</a>
+        </li>
+        <li *ngIf="currentPage < totalPages - 2">
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li *ngIf="currentPage < totalPages - 1">
+          <a class="pagination-link" (click)="goToPage(totalPages)">{{ totalPages }}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="has-text-centered" *ngIf="totalItems > 0">
+      <p class="is-size-7 has-text-grey">
+        Mostrando {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ currentPage === totalPages ? totalItems : currentPage * itemsPerPage > totalItems ? totalItems : currentPage * itemsPerPage }} de {{ totalItems }} contatos
+      </p>
+    </div>
+  </div>
+</div>

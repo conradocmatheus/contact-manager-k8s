@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate-db
+  namespace: contact-manager
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: prisma
+          image: contact-manager-back:minikube
+          imagePullPolicy: Never
+          command:
+            - npm
+            - run
+            - prisma:migrate:deploy
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: contact-manager-secrets
+                  key: DATABASE_URL

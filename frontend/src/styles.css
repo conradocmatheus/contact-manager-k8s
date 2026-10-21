@@ -1,0 +1,188 @@
+/* Global Light Theme Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root,
+html[data-theme="light"],
+body {
+  --bulma-body-background-color: #f8fafc;
+  --bulma-scheme-main: #ffffff;
+  --bulma-text: #334155;
+  --bulma-text-strong: #0f172a;
+  --bulma-title-color: #0f172a;
+  --bulma-subtitle-color: #475569;
+  --bulma-primary: #2563eb;
+  --bulma-primary-active: #1d4ed8;
+  --bulma-info: #0284c7;
+  --bulma-success: #059669;
+  --bulma-warning: #d97706;
+  --bulma-danger: #dc2626;
+
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #334155;
+  background-color: #f8fafc;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #f8fafc !important;
+}
+
+/* Base Headings */
+h1, h2, h3, h4, h5, h6,
+.title {
+  color: #0f172a !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: #475569 !important;
+  font-weight: 400;
+}
+
+/* Card Sections */
+.card-section,
+.section-card {
+  background-color: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.03) !important;
+  padding: 1.5rem !important;
+  margin-top: 1.25rem !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-section:hover,
+.section-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Hero Section */
+.hero.is-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.25) !important;
+}
+
+.hero.is-primary .title,
+.hero.is-primary .subtitle {
+  color: #ffffff !important;
+}
+
+/* Buttons */
+.button.is-primary {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 500;
+  border-radius: 8px !important;
+}
+
+.button.is-primary:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.button.is-info {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.button.is-info:hover {
+  background-color: #0369a1 !important;
+}
+
+.button.is-success {
+  background-color: #059669 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.button.is-success:hover {
+  background-color: #047857 !important;
+}
+
+.button.is-warning {
+  background-color: #d97706 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.button.is-warning:hover {
+  background-color: #b45309 !important;
+}
+
+.button.is-danger {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.button.is-danger:hover {
+  background-color: #b91c1c !important;
+}
+
+/* Form Controls */
+.input, .select select, .textarea {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus, .select select:focus, .textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+.label {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+/* Content List */
+.content ul, .content ol {
+  color: #334155 !important;
+}
+
+.content li strong {
+  color: #0f172a !important;
+}
+
+/* Table Customization */
+.table-container {
+  background-color: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important;
+}
+
+.table {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+}
+
+.table th {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+.table td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+  vertical-align: middle !important;
+}
+
+.table tr:hover {
+  background-color: #f8fafc !important;
+}

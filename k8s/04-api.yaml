@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: contact-manager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: contact-manager-back:minikube
+          imagePullPolicy: Never
+          command:
+            - node
+            - src/server.js
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: contact-manager-config
+                  key: PORT
+            - name: CORS_ORIGIN
+              valueFrom:
+                configMapKeyRef:
+                  name: contact-manager-config
+                  key: CORS_ORIGIN
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: contact-manager-secrets
+                  key: DATABASE_URL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: contact-manager-secrets
+                  key: JWT_SECRET
+            - name: NUMVERIFY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: contact-manager-secrets
+                  key: NUMVERIFY_API_KEY
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: contact-manager
+spec:
+  selector:
+    app: api
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http

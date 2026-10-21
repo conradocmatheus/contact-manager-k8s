@@ -1,0 +1,12 @@
+.about-container {
+  padding: 2rem;
+}
+
+.button.is-linkedin {
+  background-color: #0077b5;
+  color: white;
+}
+
+.button.is-linkedin:hover {
+  background-color: #005f8b;
+}

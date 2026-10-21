@@ -1,0 +1,66 @@
+name: contact-manager
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB must be set}
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER must be set}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app
+
+  api:
+    image: ${BACKEND_IMAGE:-ghcr.io/conradocmatheus/contact-manager-back:dev}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL must be set}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
+      BCRYPT_SALT_ROUNDS: ${BCRYPT_SALT_ROUNDS:-10}
+      CORS_ORIGIN: ${CORS_ORIGIN:?CORS_ORIGIN must be set}
+      NUMVERIFY_API_KEY: ${NUMVERIFY_API_KEY:-}
+      NUMVERIFY_API_URL: ${NUMVERIFY_API_URL:-https://api.apilayer.com/number_verification/validate}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app
+
+  frontend:
+    image: ${FRONTEND_IMAGE:-ghcr.io/conradocmatheus/contact-manager-front:dev}
+    restart: unless-stopped
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-http://localhost}
+      API_UPSTREAM: api:3000
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:

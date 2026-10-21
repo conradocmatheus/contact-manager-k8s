@@ -1,0 +1,14 @@
+[Unit]
+Description=Update Contact Manager application containers
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+Group=ubuntu
+Environment=DEPLOY_DIR=/home/ubuntu/contact-manager/contact-manager-back
+ExecStart=/usr/bin/bash /home/ubuntu/contact-manager/contact-manager-back/deploy/update-containers.sh
+NoNewPrivileges=true
+PrivateTmp=true

@@ -1,0 +1,15 @@
+<div class="layout-wrapper">
+  <div class="is-gapless columns layout-columns">
+    <div class="column is-narrow sidebar-container">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="column main-content-container">
+      <header class="main-header">
+        <h2 class="welcome-title">Olá, <span>{{ userName || 'Usuário' }}</span> 👋</h2>
+      </header>
+      <main class="page-content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

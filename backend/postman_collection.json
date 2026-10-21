@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "contact-manager",
+    "description": "API de gerenciamento de contatos. O token JWT identifica o usuário atual; operações de perfil e de coleção nunca recebem um userId pela URL ou pelo corpo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/signup"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Update password",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"password123\",\n  \"newPassword\": \"new-password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/password"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Current user",
+      "item": [
+        {
+          "name": "Get profile",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/me"
+          }
+        },
+        {
+          "name": "Update profile",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated User\",\n  \"email\": \"updated@example.com\"\n}"
+            },
+            "url": "{{baseUrl}}/users/me"
+          }
+        },
+        {
+          "name": "Delete account",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "List contacts",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contacts?page=1&limit=10&search="
+          }
+        },
+        {
+          "name": "Create contact",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Contact Name\",\n  \"email\": \"contact@example.com\",\n  \"phone\": \"45991214710\"\n}"
+            },
+            "url": "{{baseUrl}}/contacts"
+          }
+        },
+        {
+          "name": "Get contact",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contacts/{{contactId}}"
+          }
+        },
+        {
+          "name": "Update contact",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Contact\",\n  \"email\": \"updated-contact@example.com\",\n  \"phone\": \"45991214710\"\n}"
+            },
+            "url": "{{baseUrl}}/contacts/{{contactId}}"
+          }
+        },
+        {
+          "name": "Delete contact",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/contacts/{{contactId}}"
+          }
+        },
+        {
+          "name": "Delete all contacts",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/contacts/all"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validate phone",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/validate-phone?number=%2B5545991214710"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "token", "value": "" },
+    { "key": "contactId", "value": "1" }
+  ]
+}

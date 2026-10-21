@@ -1,0 +1,35 @@
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  padding: 2rem !important;
+}
+
+.profile-avatar {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-icon {
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  background-color: #e2e8f0;
+  height: 1px;
+  margin: 1.75rem 0;
+}
+
+.buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.buttons-group .button {
+  width: 100%;
+  justify-content: center;
+}
