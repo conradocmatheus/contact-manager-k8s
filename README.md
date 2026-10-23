@@ -7,7 +7,7 @@ As cópias partiram de [`contact-manager-back`](https://github.com/conradocmathe
 ## Arquitetura
 
 ```text
-Navegador -> localhost:8080 -> port-forward -> Service frontend -> Caddy/Angular
+Navegador -> localhost:8081 -> port-forward -> Service frontend -> Caddy/Angular
                                                           |
                                                           +-- /api/* -> Service api -> 2 Pods Express
                                                                                       |
@@ -76,10 +76,10 @@ Se faltar o Minikube, instale-o com `winget install -e --id Kubernetes.minikube`
 6. Em outro terminal, exponha o frontend para o navegador:
 
    ```powershell
-   kubectl port-forward -n contact-manager service/frontend 8080:80
+   kubectl port-forward -n contact-manager service/frontend 8081:80
    ```
 
-   Acesse <http://localhost:8080>. O cadastro de usuário, login e gerenciamento de contatos devem funcionar. A API pode ser verificada com `curl.exe -i http://localhost:8080/api/health`.
+   Acesse <http://localhost:8081>. O cadastro de usuário, login e gerenciamento de contatos devem funcionar. A API pode ser verificada com `curl.exe -i http://localhost:8081/api/health`. A porta local `8081` evita conflito com serviços que já usam `8080`; se ela também estiver ocupada, escolha outra porta livre à esquerda de `:80`.
 
 ## Demonstração exigida
 

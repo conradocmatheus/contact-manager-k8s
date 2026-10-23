@@ -7,6 +7,6 @@ data:
   POSTGRES_DB: contact_manager
   POSTGRES_USER: contact_manager
   PORT: "3000"
-  CORS_ORIGIN: http://localhost:8080
+  CORS_ORIGIN: http://localhost:8081
   SITE_ADDRESS: ":80"
   API_UPSTREAM: api:3000
