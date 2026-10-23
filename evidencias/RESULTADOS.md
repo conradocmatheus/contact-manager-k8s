@@ -12,4 +12,13 @@ Implantação testada em Minikube 1.39.0, Kubernetes 1.37.0, driver Docker no Wi
 - Autorrecuperação: Pod `api-6f7fc549dd-5l9qf` excluído; novo Pod `api-6f7fc549dd-ndb9h` criado; Deployment voltou a 2/2.
 - Testes automatizados do backend: 17 passaram, 0 falharam (com `JWT_SECRET` de teste).
 
-As capturas de tela para a apresentação ainda devem ser adicionadas a esta pasta. Execute os comandos da seção **Demonstração exigida** no README e capture também a aplicação no navegador.
+Em 23/10/2026, o frontend e a API também responderam HTTP 200 pelo `port-forward` em `http://localhost:8081`.
+
+## Capturas recebidas
+
+- [Aplicação e port-forward em 8081](aplicacao-e-port-forward.png)
+- [Pods](pods.png)
+- [Deployments](deployments.png)
+- [Services](services.png)
+
+Ainda faltam capturas da distribuição entre as duas réplicas da API e da recriação automática de um Pod. Os comandos estão na seção **Demonstração exigida** do README principal.
