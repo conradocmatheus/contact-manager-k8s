@@ -20,5 +20,6 @@ Em 23/10/2026, o frontend e a API também responderam HTTP 200 pelo `port-forwar
 - [Pods](pods.png)
 - [Deployments](deployments.png)
 - [Services](services.png)
+- [Balanceamento e recriação de um Pod da API](recriacao.png): respostas dos Pods `api-76f4877d85-zsbrx` e `api-76f4877d85-znlnw`; após excluir `znlnw`, o novo Pod `api-76f4877d85-whtbq` aparece em `Running`, mantendo duas réplicas.
 
-Ainda faltam capturas da distribuição entre as duas réplicas da API e da recriação automática de um Pod. Os comandos estão na seção **Demonstração exigida** do README principal.
+As capturas cobrem a aplicação, Pods, Services, Deployments, balanceamento e autorrecuperação. Refaça a demonstração ao vivo conforme a seção **Demonstração exigida** do README principal.
